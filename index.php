@@ -1,123 +1,36 @@
-<?php include './layout.php' ?>
-<!doctype html>
-<html lang="en">
+<!-- 
+#*************************************************************
+#
+# SUBJECT: SIMPLE PHP AJAX CRUD
+# AUTHOR NAME: JAYVEE P AYAO 
+# CREATED DATE : March 15, 2018
+# FACEBOOK: https://www.facebook.com/jay.romantiko
+# LINKEDIN: https://www.linkedin.com/in/jayvee-ayao-487b5613a/
+#
+#*************************************************************
+ -->
+<?php require 'config/db.php' ?>
+<?php 
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-   
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-   
-    <title>Dasturga kirish</title>
-</head>
-
-<body>
-
-<div class="row">
-        <div class="col-lg-3 bg-primary w-full h-full" style="height: 100vh;;">
-                <ul>
-                    <li><a class="text-white btn my-3" style="padding:14px 30px; font-size: 30px;" href="#!">Create</a></li>
-                    <li><a class="text-white btn my-3" style="padding:14px 30px; font-size: 30px;" href="#!">Edit</a></li>
-                    <li><a class="text-white btn my-3" style="padding:14px 30px; font-size: 30px;" href="#!">Update</a></li>
-                    <li><a class="text-white btn my-3" style="padding:14px 30px; font-size: 30px;" href="#!">Delete</a></li>
-                </ul>
-        </div>
-
-        <div class="col-lg-9 my-3">
-            <div class="main">
-                    <div class="container">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Index page
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="wrapper">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="mt-5 mb-3 clearfix">
-                                                        <h3 class="mt-5">Maxsulot boshqarish menyusi</h3>
-                                                        <div class="pull-left">
-                                                            <form class="form-inline" method="post" action="Search.php">
-                                                                <input type="text" name="nomi" class="form-control" placeholder="Nomi bo'yicha qidirish">
-                                                                <!-- <input type="text" name="id" class="form-control" placeholder="Id si bo'yicha qidirish"> -->
-                                                                <button type="submit" name="save" class="btn btn-primary">Qidirish</button>
-                                                            </form>
-                                                        </div>
-                                                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Maxsulot qo'shish</a>
-                                                    </div>
-                                                    <?php
-                                                    require_once "config.php";
-                                                    $sql = "SELECT * FROM vaksina";
-                                                    if ($result = mysqli_query($link, $sql)) {
-                                                        if (mysqli_num_rows($result) > 0) {
-                                                            echo '<table class="table table-bordered table-striped">';
-                                                            echo "<thead>";
-                                                            echo "<tr>";
-                                                            echo "<th>Id</th>";
-                                                            echo "<th>Nomi</th>";
-                                                            echo "<th>Mavjud soni</th>";
-                                                            echo "<th>Qabul qilish soni</th>";
-                                                            echo "<th>Ma'lumotlari</th>";
-                                                            echo "<th>Oraliq kuni</th>";
-                                                            echo "<th>Action</th>";
-                                                            echo "</tr>";
-                                                            echo "</thead>";
-                                                            echo "<tbody>";
-                                                            while ($row = mysqli_fetch_array($result)) {
-                                                                echo "<tr>";
-                                                                echo "<td>" . $row['id'] . "</td>";
-                                                                echo "<td>" . $row['nomi'] . "</td>";
-                                                                echo "<td>" . $row['mavjud_soni'] . "</td>";
-                                                                echo "<td>" . $row['qabul_qilish_soni'] . "</td>";
-                                                                echo "<td>" . $row['malumotlari'] . "</td>";
-                                                                echo "<td>" . $row['oraliq_kuni'] . "</td>";
-                                                                echo "<td>";
-                                                                echo '<a href="read.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                                echo '<a href="update.php?id=' . $row['id'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                                echo '<a href="delete.php?id=' . $row['id'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
-                                                                echo "</td>";
-                                                                echo "</tr>";
-                                                            }
-                                                            echo "</tbody>";
-                                                            echo "</table>";
-                                                            mysqli_free_result($result);
-                                                        } else {
-                                                            echo '<div class="alert alert-danger"><em>Vaksinalar yoq</em></div>';
-                                                        }
-                                                    } else {
-                                                        echo "Qayta urunib koring.";
-                                                    }
-                                                    mysqli_close($link);
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <p><a href="index.php" id="joylash" class="btn btn-primary">Orqaga qaytish</a></p>
-                    </div>
-            
-            
-            
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-                    </div>
-       </div>
-            
+  $pg = (isset($_GET['pg']) && !empty($_GET['pg'])? $_GET['pg']:'');
   
-</body>
+   switch($pg){
+   	    case 'home':
+               $title = 'home';
+               $active = 'home';
+               $content = 'view/home.php';
+               $js=array("asset/action.js");
+   	    break;
 
-</html>
+   	    default:
+               $title = 'home';
+               $active = 'home';
+               $content = 'view/home.php';
+               $js=array("asset/action.js");
+   	    break;
+
+
+   }
+
+   include 'template/content.php';
+?>
