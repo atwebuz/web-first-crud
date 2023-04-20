@@ -126,8 +126,3 @@ COMMIT;
 ```
 
  
-### just download to checkout the full details https://github.com/reyven90/php-ajax-login
-
-### more question just pm me on facebook https://www.facebook.com/jay.romantiko
-
-### thank you for following Goodbless :-)
