@@ -6,8 +6,15 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 <?= require './inc/header.php'?>
 <main class="container">
 
+<div class="btn_groups d-flex justify-content-between">
+    <a href="add.php" class="btn btn-primary my-4">Create</a>
+    
+    <div class="auth">
+        <a href="registration.php" class="btn btn-primary my-4">Registration</a>
+        <a href="login.php" class="btn btn-primary my-4">Login</a>
+    </div>
 
-<a href="add.php" class="btn btn-primary my-4">Create></a>
+</div>
 
     <table class="table table-success table-striped">
         <thead>
