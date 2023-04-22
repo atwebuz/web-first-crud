@@ -1,9 +1,7 @@
-<html>
-<head>
-	<title>Add Users</title>
-</head>
+<?= include './inc/header.php'?>
+<main class="container">
 
-<body>
+
 	<a href="index.php">Go to Home</a>
 	<br/><br/>
 
@@ -27,6 +25,8 @@
 			</tr>
 		</table>
 	</form>
+
+</main>
 	
 	<?php
 
@@ -46,5 +46,5 @@
 		echo "User added successfully. <a href='index.php'>View Users</a>";
 	}
 	?>
-</body>
-</html>
+
+<?= include './inc/footer.php'?>

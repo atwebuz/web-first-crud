@@ -1,39 +1,42 @@
 <?php
-/**
-* Simple PHP CRUD Script
-* Developed by TutorialsClass.com
-* URL:  http://tutorialsclass.com/code/php-simple-crud-application
-**/
-
-// Create database connection using config file
 include_once("config.php");
-
-// Fetch all users data from database
 $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 ?>
 
-<html>
-<head>    
-    <title>Homepage</title>
-</head>
+<?= require './inc/header.php'?>
+<main class="container">
 
-<body>
-<a href="add.php">Add New User</a><br/><br/>
 
-    <table width='80%' border=1>
+<a href="add.php" class="btn btn-primary my-4">Create></a>
 
-    <tr>
-        <th>Name</th> <th>Mobile</th> <th>Email</th> <th>Update</th>
-    </tr>
-    <?php  
-    while($user_data = mysqli_fetch_array($result)) {         
-        echo "<tr>";
-        echo "<td>".$user_data['name']."</td>";
-        echo "<td>".$user_data['mobile']."</td>";
-        echo "<td>".$user_data['email']."</td>";    
-        echo "<td><a href='edit.php?id=$user_data[id]'>Edit</a> | <a href='delete.php?id=$user_data[id]'>Delete</a></td></tr>";        
-    }
-    ?>
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Email</th>
+                <th scope="col">Update</th>
+            </tr>
+        </thead>
+
+        <style>
+       
+        </style>
+     
+        <?php  
+            while($request = mysqli_fetch_array($result)) {         
+                echo "<tr>";
+                echo "<td>".$request['id']."</td>";
+                echo "<td>".$request['name']."</td>";
+                echo "<td>".$request['mobile']."</td>";    
+                echo "<td>".$request['email']."</td>";    
+                echo "<td><a href='edit.php?id=$request[id]'>Edit <i class='fa-solid fa-file-pen '></i></a> | <a href='delete.php?id=$request[id]'>Delete <i class='fa-solid fa-trash'></i></a></td></tr>";        
+            }    
+        ?>
+    
+       
     </table>
-</body>
-</html>
+    </main>
+
+<?= include './inc/footer.php'?>
