@@ -1,4 +1,4 @@
-<?= include './inc/header.php'?>
+<?= require_once './inc/header.php'?>
 <main class="container">
 
 
@@ -37,7 +37,7 @@
 		$mobile = $_POST['mobile'];
 		
 		// include database connection file
-		include_once("config.php");
+		require_once("config.php");
 				
 		// Insert user data into table
 		$result = mysqli_query($mysqli, "INSERT INTO users(name,email,mobile) VALUES('$name','$email','$mobile')");
@@ -47,4 +47,4 @@
 	}
 	?>
 
-<?= include './inc/footer.php'?>
+<?= require_once './inc/footer.php'?>

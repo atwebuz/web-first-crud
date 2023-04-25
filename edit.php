@@ -1,5 +1,5 @@
 <?php
-include_once("config.php");
+require_once("config.php");
 
 if(isset($_POST['update'])){	
 	$id = $_POST['id'];
@@ -23,7 +23,7 @@ while($request = mysqli_fetch_array($result))
 }
 ?>
 
-<?= require_once './inc/header.php'?>
+<?php require_once './inc/header.php'?>
 <main class="container">
 
 	<a href="index.php">Home</a>
@@ -51,5 +51,5 @@ while($request = mysqli_fetch_array($result))
 	</form>
 
 </main>
-	<?php echo require_once './inc/header.php'?>
+	<?php require_once './inc/header.php'?>
 

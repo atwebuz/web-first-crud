@@ -3,7 +3,7 @@ include_once("config.php");
 $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 ?>
 
-<?= require './inc/header.php'?>
+<?php require_once './inc/header.php'?>
 <main class="container">
 
 <div class="btn_groups d-flex justify-content-between">
@@ -46,4 +46,4 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
     </table>
     </main>
 
-<?= include './inc/footer.php'?>
+<?php require_once './inc/footer.php'?>

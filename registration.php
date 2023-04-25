@@ -1,9 +1,12 @@
-<?php require('./inc/header.php') ?>
+<?php 
+require_once('./inc/header.php');
+require_once './config.php';
+error_reporting(E_ALL); ?>
 
 <header>
-    
+
     <div class="container">
-        <h1 class="text-center mt-4">Registration</h1>
+    <h1 class="text-center mt-4">Registration</h1>
 
 
         <form class="mt-4 w-50 m-auto" class="form" action="registration.php" method="post" enctype="multipart/form-data">
@@ -44,7 +47,7 @@
                     $name = $_POST["address"];
                 }
 
-               
+                
 
             }
             ?>
@@ -82,33 +85,32 @@
     <!-- file uploading -->
 
     <?php
-    print_r($_FILES);
-    $target_dir = "/images/";
-    $target_file = __DIR__ . $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        echo "============== $check";
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-            if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
-                echo "Faylyuklandi.\n";
-            } else {
-                echo "Fayl yuklanmadi!\n";
-            }
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    }
-    ?>
+//     print_r($_FILES);
+//     $target_dir = "/images/";
+//     $target_file = __DIR__ . $target_dir . basename($_FILES["fileToUpload"]["name"]);
+//     $uploadOk = 1;
+//     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+//         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+//         echo "============== $check";
+//         if ($check !== false) {
+//             echo "File is an image - " . $check["mime"] . ".";
+//             $uploadOk = 1;
+//             if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
+//                 echo "Faylyuklandi.\n";
+//             } else {
+//                 echo "Fayl yuklanmadi!\n";
+//             }
+//         } else {
+//             echo "File is not an image.";
+//             $uploadOk = 0;
+//         }
+// echo 123;
+?>
 
     <!-- file uploading end -->
 
     <?php
-
+echo 123;
     $name = $_POST["name"];
     $email = $_POST["email"];
     $password = md5($_POST["password"]);
@@ -117,10 +119,11 @@
 
     $query = "INSERT INTO registration  VALUES ('$name',null, '$email','$password','$address','$image')";
 
-
+    echo $query;
     $result = mysqli_query($mysqli, $query) or
 
         die("So'rov ishlamadi : " . mysqli_error($mysqli));
+        echo 123;
 
 
     mysqli_free_result($result);

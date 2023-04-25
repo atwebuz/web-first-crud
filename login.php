@@ -1,8 +1,35 @@
-<?php require('./inc/header.php')?>
+<?php 
+require_once('./inc/header.php');
+require_once './config.php';
+
+?>
 
 <header>
     <div class="container mt-3 w-50">
-        <h1 class="text-center mt-4">Login</h1>
+        <?php
+   
+        if(isset($_POST['loginForm'])){
+                $new_password= md5($_POST["password"]);
+                $query = "SELECT * FROM registration WHERE email = '{$_POST['email']}' and password = '$new_password'";
+
+                $result = mysqli_query($mysqli, $query);
+
+            
+                if (mysqli_num_rows($result)!=0) { 
+                    header( "Refresh:3; index.php", true, 303);
+                    ?>
+                        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        checking    
+                    <?php
+                  
+                }else{
+                    header( "Refresh:3; error.php", true, 303);
+                }
+            }
+            else{
+?>
+
+<h1 class="text-center mt-4">Login</h1>
         <form method="post" >
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -20,25 +47,11 @@
             <button type="submit" class="btn btn-primary" name="loginForm">Submit</button>
         </form>
 
-        <?php
-   
-        if(isset($_POST['loginForm'])){
-                $new_password= md5($_POST["password"]);
-                $query = "SELECT * FROM registration WHERE email = '{$_POST['email']}' and password = '$new_password'";
 
-                $result = mysqli_query($mysqli, $query);
-
-            
-                if (mysqli_num_rows($result)!=0) { 
-                    echo "<br> Correct password ";
-                  
-                }else{
-                    echo 'error toplmad';
-                }
-            }
+  <?php          }
         ?>
 
     </div>
 </header> 
 
-<?php require('./inc/footer.php')?>
+<?php require_once('./inc/footer.php')?>
