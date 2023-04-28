@@ -1,6 +1,22 @@
 <?php
 include_once("config.php");
-$result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
+
+$s_id="";
+$s_name="";
+
+if (isset($_POST['name'] ) && strlen($_POST['name'])){
+
+    $s_name = " and name = '{$_POST['name']}' "; 
+} 
+
+if (isset($_POST['id'])){
+    $s_name = " and id = {$_POST['id']} "; 
+}
+
+// echo "SELECT * FROM users where 1 = 1 $s_name $s_id ORDER BY id DESC" ;
+
+$result = mysqli_query($mysqli, "SELECT * FROM users where 1 = 1 $s_name $s_id ORDER BY id DESC");
+
 ?>
 
 <?php require_once './inc/header.php'?>
@@ -15,6 +31,16 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
     </div>
 
 </div>
+<form class="form-inline" method="POST" action="index.php">
+				<div class="input-group col-md-12">
+					<input type="text" class="form-control" placeholder="Search here..." name="name"  value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>"/>
+					<span class="input-group-btn">
+						<button class="btn btn-primary" name="search">click</button>
+					</span>
+		</div>
+			</form>
+			<br />
+
 
     <table class="table table-success table-striped">
         <thead>
@@ -24,6 +50,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
                 <th scope="col">Mobile</th>
                 <th scope="col">Email</th>
                 <th scope="col">Update</th>
+                
             </tr>
         </thead>
 
